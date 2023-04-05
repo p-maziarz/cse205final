@@ -41,7 +41,7 @@ public class Database {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
-		*/
+		
 		
 		//Insert
 		try {
@@ -74,6 +74,53 @@ public class Database {
 			System.out.println("Just added 5 new elements to the table.");
 			
 		} catch (Exception e){
+			e.printStackTrace();
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+		}
+		
+		*/
+		
+		//Select
+		
+		try { //Because we're only doing queries, no insertion, we don't need to set the autocommit to false 
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from company;"); //ResultSet allows to grab information and bring it back and print it out
+			
+			while (rs.next()) { //while rs.next has an element inside of it
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				int age = rs.getInt("age");
+				String address = rs.getString("address");
+				float salary = rs.getFloat("salary");
+				
+				System.out.println("ID: " + id);
+				System.out.println("NAME: " + name);
+				System.out.println("AGE: " + age);
+				System.out.println("ADDRESS: " + address); //put in single quotes when getting from terminal bc its a string 
+				System.out.println("SALARY: " + salary);
+				System.out.println();
+				
+			} //this will return all of the above information
+			
+			rs = stmt.executeQuery("select name, age from company where age < 30;"); //ResultSet allows to grab information and bring it back and print it out
+			
+			while (rs.next()) { //while rs.next has an element inside of it
+				String name = rs.getString("name");
+				int age = rs.getInt("age");
+				
+				System.out.println("NAME: " + name);
+				System.out.println("AGE: " + age);
+				System.out.println();
+				
+			}
+			
+			System.out.println("Done...");
+			rs.close();
+			stmt.close();
+			c.close();
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
