@@ -21,6 +21,8 @@ public class Database {
 			System.exit(0);
 		}
 		
+		/*
+		
 		try {
 			stmt = c.createStatement();
 			String sql = "CREATE TABLE COMPANY " + 
@@ -33,6 +35,43 @@ public class Database {
 			stmt.close();
 			c.close();
 			System.out.println("Table has been created.");
+			
+		} catch (Exception e){
+			e.printStackTrace();
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+		}
+		*/
+		
+		//Insert
+		try {
+			c.setAutoCommit(false); //Anytime changes need to made to the database, autocommit has to be disabled, or set to false, it allows us to make commitments to the database
+			stmt = c.createStatement();
+			
+			String sql = "INSERT INTO COMPANY (" +
+						"ID,NAME,AGE,ADDRESS,SALARY) " +
+						"VALUES (1, 'Mike', 37, 'California', 20000.00);";
+			stmt.executeLargeUpdate(sql);
+					
+			sql = "INSERT INTO COMPANY (" +
+					"ID,NAME,AGE,ADDRESS,SALARY) " +
+					"VALUES (2, 'Sara', 34, 'California', 21000.00);";
+			stmt.executeLargeUpdate(sql);
+		
+			sql = "INSERT INTO COMPANY (" +
+					"ID,NAME,AGE,ADDRESS,SALARY) " +
+					"VALUES (3, 'Jake', 27, 'California', 30000.00);";
+			stmt.executeLargeUpdate(sql);
+			
+			sql = "INSERT INTO COMPANY (" +
+					"ID,NAME,AGE,ADDRESS,SALARY) " +
+					"VALUES (4, 'Connor', 75, 'California', 100000.00);";
+			stmt.executeLargeUpdate(sql);
+			
+			stmt.close();
+			c.commit();
+			c.close();
+			System.out.println("Just added 5 new elements to the table.");
 			
 		} catch (Exception e){
 			e.printStackTrace();
