@@ -123,14 +123,51 @@ public class Database {
 			System.exit(0);
 		}
 		
-		*/
-		
 		//Update
 		
 		try {
 			c.setAutoCommit(false);
 			stmt = c.createStatement();
 			String sql = "UPDATE COMPANY set SALARY = 30000.00 where ID = 3;";
+			stmt.executeUpdate(sql);
+			c.commit();
+			
+			ResultSet rs = stmt.executeQuery("select * from company;"); //ResultSet allows to grab information and bring it back and print it out
+			
+			while (rs.next()) { //while rs.next has an element inside of it
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				int age = rs.getInt("age");
+				String address = rs.getString("address");
+				float salary = rs.getFloat("salary");
+				
+				System.out.println("ID: " + id);
+				System.out.println("NAME: " + name);
+				System.out.println("AGE: " + age);
+				System.out.println("ADDRESS: " + address); //put in single quotes when getting from terminal bc its a string 
+				System.out.println("SALARY: " + salary);
+				System.out.println();
+				
+			}
+			rs.close();
+			stmt.close();
+			c.close();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+		}
+		
+		*/
+		
+		//Delete - Very similar to update, so you can copy-paste the whole try-catch
+		
+		try {
+			c.setAutoCommit(false);
+			stmt = c.createStatement();
+			String sql = "DELETE from COMPANY where ID = 4;";
 			stmt.executeUpdate(sql);
 			c.commit();
 			
