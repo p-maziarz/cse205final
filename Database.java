@@ -21,8 +21,6 @@ public class Database {
 			System.exit(0);
 		}
 		
-		/*
-		
 		try {
 			stmt = c.createStatement();
 			String sql = "CREATE TABLE COMPANY " + 
@@ -159,9 +157,7 @@ public class Database {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
-		
-		*/
-		
+			
 		//Delete - Very similar to update, so you can copy-paste the whole try-catch
 		
 		try {
